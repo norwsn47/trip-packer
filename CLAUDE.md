@@ -73,6 +73,14 @@ Read it at the start of every session. These rules apply to all tasks.
 
 ---
 
+## UI & visual design
+
+Before writing any UI, read DESIGN.md. Use the colour tokens, typography scale,
+spacing values, and component patterns defined there throughout. Do not default
+to generic styles — follow that direction for every element you build.
+
+---
+
 ## Task completion summary
 
 At the end of every significant task, provide a summary covering:
@@ -93,6 +101,7 @@ At the end of every significant task, provide a summary covering:
 | `CLAUDE.md` | Ground rules for this codebase (this file) |
 | `PRD.md` | What we're building — product requirements |
 | `BUILDPLAN.md` | How and in what order we're building it |
+| `DESIGN.md` | Visual direction — colours, typography, spacing, components |
 | `BACKLOG.md` | Ideas and changes logged for later — not in scope yet |
 
 ---
