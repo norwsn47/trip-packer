@@ -85,7 +85,7 @@ function renderItemList(items) {
 
   return `
     <div class="screen-header">
-      <h1 class="screen-title">Items</h1>
+      <h1 class="screen-title"><span class="wordmark-main">Packlist</span><span class="wordmark-sub"> by Outbuild</span></h1>
       <div class="header-actions">
         <div id="clear-all-area">${hasChecked ? '<button class="btn-clear-all" id="btn-clear-all">Clear all</button>' : ''}</div>
         <button class="btn-icon" id="btn-add" aria-label="Add item">
@@ -97,7 +97,7 @@ function renderItemList(items) {
         </button>
       </div>
     </div>
-    ${renderFilterBar()}
+    ${renderTripFilter()}
     ${sections.length === 0
       ? '<p class="filter-empty">No items for this trip type.</p>'
       : sections.map(function (s) { return renderCategorySection(s, checks); }).join('')
@@ -105,14 +105,16 @@ function renderItemList(items) {
   `;
 }
 
-function renderFilterBar() {
-  const filters = [{ key: 'all' }].concat(TRIP_TYPES.map(function (t) { return { key: t.key }; }));
+function renderTripFilter() {
   return `
-    <div class="filter-bar" role="group" aria-label="Filter by trip type">
-      ${filters.map(function (f) {
-        const active = f.key === activeFilter ? ' filter-chip--active' : '';
-        return `<button class="filter-chip${active}" data-filter="${f.key}">${escapeHtml(FILTER_LABELS[f.key])}</button>`;
-      }).join('')}
+    <div class="filter-row">
+      <label class="filter-label" for="trip-filter">Trip type:</label>
+      <select class="filter-select" id="trip-filter">
+        <option value="all"${activeFilter === 'all' ? ' selected' : ''}>All</option>
+        ${TRIP_TYPES.map(function (t) {
+          return `<option value="${t.key}"${activeFilter === t.key ? ' selected' : ''}>${escapeHtml(t.label)}</option>`;
+        }).join('')}
+      </select>
     </div>
   `;
 }
@@ -174,14 +176,14 @@ function bindScreenEvents() {
   const addFirstBtn = document.getElementById('btn-add-first');
   if (addFirstBtn) addFirstBtn.addEventListener('click', function () { openDialog(); });
 
-  document.getElementById('screen').addEventListener('click', function (e) {
-
-    const chip = e.target.closest('.filter-chip');
-    if (chip) {
-      activeFilter = chip.dataset.filter;
+  document.getElementById('screen').addEventListener('change', function (e) {
+    if (e.target.id === 'trip-filter') {
+      activeFilter = e.target.value;
       showItemsScreen();
-      return;
     }
+  });
+
+  document.getElementById('screen').addEventListener('click', function (e) {
 
     const checkBtn = e.target.closest('.item-check');
     if (checkBtn) {
