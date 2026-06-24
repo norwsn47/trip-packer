@@ -14,8 +14,8 @@ Follow these decisions throughout all chunks.
 --border:       #E4E2DC;   /* dividers and outlines */
 --ink:          #1C1C1E;   /* primary text */
 --ink-muted:    #8A8880;   /* secondary text, labels, metadata */
---accent:       #4A7C59;   /* primary action — forest green (outdoors feel) */
---accent-light: #EAF2EC;   /* accent background tint */
+--accent:       #2d6a4f;   /* primary action — forest green (matches Munro Tracker) */
+--accent-light: #d8f3dc;   /* accent background tint — mint (matches Munro Tracker) */
 --danger:       #C0392B;   /* destructive actions only */
 --checked:      #8A8880;   /* checked-off item text colour */
 ```
@@ -24,7 +24,7 @@ Follow these decisions throughout all chunks.
 
 ## Typography
 
-- **Font:** System font stack — `-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`
+- **Font:** Inter — `'Inter', system-ui, sans-serif` — load from Google Fonts (weights 300, 400, 500, 600). Matches Munro Tracker exactly.
 - **Base size:** 16px on html element
 - **Scale:**
   - Screen title: 28px, weight 700, letter-spacing -0.02em
@@ -42,8 +42,8 @@ Follow these decisions throughout all chunks.
 - Screen padding (horizontal): 16px
 - Section gap: 24px
 - Card border-radius: 12px
-- Button border-radius: 10px
-- Small element border-radius (tags, pills): 6px
+- Button border-radius: 99px (pill shaped — matches Munro Tracker)
+- Small element border-radius (tags, pills): 99px
 
 ---
 
@@ -88,6 +88,42 @@ Follow these decisions throughout all chunks.
 
 ---
 
+## Category order (master item list + checklists)
+
+Categories always appear in this fixed order — not alphabetical, not random:
+
+1. Base Layers
+2. Mid Layers
+3. Outer Layers
+4. Gloves
+5. Footwear
+6. Clothing (non-walking)
+7. Navigation
+8. First Aid
+9. Cycle Kit
+10. Electronics / Lighting
+11. Toiletries
+12. Sleep
+13. Cooking
+14. Food & Condiments
+15. Essentials
+
+This order reflects how you'd pack: what you wear first at the top, camp setup and food at the bottom.
+
+---
+
+## Category groups (master item list)
+
+- Category name as a section header: 11px, weight 600, uppercase, letter-spacing 0.08em, `--ink-muted`
+- 3px left border in `--accent` on the group header row
+- 16px gap between groups
+- Items within a group: white surface cards, thin `--border` divider between items
+- First item in group: rounded top corners (8px). Last item: rounded bottom corners.
+- Category header is NOT a card — it sits above the card group as a plain label
+- On the master list, show item count per category in muted text next to the label (e.g. "COOKING · 8 items")
+
+---
+
 ## Empty states
 
 - Centred in the available space
@@ -98,9 +134,22 @@ Follow these decisions throughout all chunks.
 
 ---
 
+## Forms & inputs
+
+- **All input fields, textareas, and selects must have `font-size: 16px` minimum** — this is non-negotiable on iOS Safari. Anything below 16px causes the page to auto-zoom on focus, which is jarring on a mobile tool.
+- Input padding: 14px 12px
+- Border: `1px solid --border`, border-radius 10px
+- Focus state: border colour shifts to `--accent`, no outline
+- Background: `--surface`
+- Never style inputs smaller to "look neater" — the zoom behaviour overrides any aesthetic gain
+
+---
+
 ## General rules
 
 - No drop shadows anywhere (use borders instead)
+- **Exception — cards and list groups:** `box-shadow: 0 4px 24px rgba(0,0,0,0.07)` — matches Munro Tracker's soft lifted card feel
+- Bottom sheet shadow: `0 -4px 16px rgba(0,0,0,0.08)`
 - No gradients
 - No decorative elements — every pixel earns its place
 - Transitions: 150ms ease for interactive state changes only

@@ -4,14 +4,87 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Packlist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body>
     <div id="app">
       <main id="screen"></main>
-      <nav id="tab-bar"></nav>
     </div>
+
+    <dialog id="item-dialog" aria-labelledby="dialog-title">
+      <div class="dialog-handle" aria-hidden="true"></div>
+      <div class="dialog-inner">
+        <h2 class="dialog-title" id="dialog-title">Add item</h2>
+        <form id="item-form" novalidate>
+
+          <div class="form-group">
+            <label class="form-label" for="field-name">Name</label>
+            <input class="form-input" type="text" id="field-name" name="name"
+                   placeholder="e.g. Tent" autocomplete="off" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="field-category">Category</label>
+            <select class="form-input form-select" id="field-category" name="category" required>
+              <option value="" disabled selected>Select a category</option>
+              <option>Base Layers</option>
+              <option>Mid Layers</option>
+              <option>Outer Layers</option>
+              <option>Gloves</option>
+              <option>Footwear</option>
+              <option>Clothing (non-walking)</option>
+              <option>First Aid</option>
+              <option>Cycle Kit</option>
+              <option>Electronics</option>
+              <option>Toiletries</option>
+              <option>Sleep</option>
+              <option>Cooking</option>
+              <option>Essentials</option>
+              <option>Optional</option>
+            </select>
+          </div>
+
+          <div class="form-group" id="trip-type-section">
+            <span class="form-label" id="trip-types-label">Trip types</span>
+            <ul class="trip-type-list" role="group" aria-labelledby="trip-types-label">
+              <li><label class="trip-type-option">
+                <input type="checkbox" name="tripType" value="winter-hiking-single" />
+                <span>Winter hiking — single day</span>
+              </label></li>
+              <li><label class="trip-type-option">
+                <input type="checkbox" name="tripType" value="winter-hiking-multi" />
+                <span>Winter hiking — multi day</span>
+              </label></li>
+              <li><label class="trip-type-option">
+                <input type="checkbox" name="tripType" value="summer-hiking-single" />
+                <span>Summer hiking — single day</span>
+              </label></li>
+              <li><label class="trip-type-option">
+                <input type="checkbox" name="tripType" value="summer-hiking-multi" />
+                <span>Summer hiking — multi day</span>
+              </label></li>
+              <li><label class="trip-type-option">
+                <input type="checkbox" name="tripType" value="cycle-camping" />
+                <span>Cycle camping</span>
+              </label></li>
+            </ul>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save item</button>
+            <button type="button" class="btn btn-secondary" id="btn-cancel">Cancel</button>
+            <button type="button" class="btn-destructive" id="btn-delete" hidden>Delete item</button>
+          </div>
+
+        </form>
+      </div>
+    </dialog>
+
     <script src="js/storage.js" defer></script>
+    <script src="js/items.js" defer></script>
     <script src="js/app.js" defer></script>
   </body>
 </html>
